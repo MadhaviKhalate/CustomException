@@ -6,7 +6,7 @@ namespace IndianStateAndCodeTesting
         public void GivenStatesCensusCSVFile_CheckNumberOfRecordsMatches()
         {
             int expected = 29;
-            string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser\IndiaStateCensusAnalyser\
+            string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser\
                                     IndiaStateCensusAnalyser\StateCensusData.csv";
             IndiaStateCensusAnalyser.StateAnalyserClass getMethod = new IndiaStateCensusAnalyser.StateAnalyserClass();
             int actual = getMethod.DataAnalyser(filePath);
@@ -52,8 +52,8 @@ namespace IndianStateAndCodeTesting
             try
             {
                 int expected = 29;
-                string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser\IndiaStateCensusAnalyser\
-                                    IndiaStateCensusAnalyser\InvalidDelimiterCensusData.csv";
+                string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser
+                                \IndiaStateCensusAnalyser\InvalidDelimiterCensusData.csv";
                 IndiaStateCensusAnalyser.StateAnalyserClass getMethod = new IndiaStateCensusAnalyser.StateAnalyserClass();
                 int actual = getMethod.DataAnalyser(filePath);
                 Assert.AreEqual(expected, actual);
@@ -69,7 +69,7 @@ namespace IndianStateAndCodeTesting
             try
             {
                 int expected = 29;
-                string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser\IndiaStateCensusAnalyser\
+                string filePath = @"D:\BridgeLabzFelloship\IndianStatesCensusAnalyser\
                                     IndiaStateCensusAnalyser\IncorrectHeaderCensusData.csv";
                 IndiaStateCensusAnalyser.StateAnalyserClass getMethod = new IndiaStateCensusAnalyser.StateAnalyserClass();
                 int actual = getMethod.DataAnalyser(filePath);
