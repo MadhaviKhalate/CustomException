@@ -45,21 +45,41 @@ namespace IndiaStateCensusAnalyser
             }
             throw new CustomException(CustomException.ExceptionType.INVALID_FILE_TYPE, "Invalid File Type");
         }
+
         public int StateCodeAnalyser(string filePath)
         {
-            int numberOfRecords;
-            using (var reader = new StreamReader(filePath))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            if (Path.GetExtension(filePath) == ".csv")
             {
-                var details = csv.GetRecords<StatesCode>().ToList();
-                numberOfRecords = details.Count();
-                foreach (var item in details)
+                try
                 {
-                    Console.WriteLine("SrNo: " + item.SrNo + "\nState: " + item.State + "\nName: " + item.Name
-                        + "\nTIN: " + item.TIN + "\nStateCode: " + item.StateCode + "\n");
+                    if (filePath.Contains("StateCode.csv"))
+                    {
+                        int numberOfRecords;
+                        using (var reader = new StreamReader(filePath))
+                        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                        {
+                            var details = csv.GetRecords<StatesCode>().ToList();
+                            numberOfRecords = details.Count();
+                            foreach (var item in details)
+                            {
+                                Console.WriteLine("SrNo: " + item.SrNo + "\nState: " + item.State + "\nName: " + item.Name
+                                    + "\nTIN: " + item.TIN + "\nStateCode: " + item.StateCode + "\n");
+                            }
+                        }
+                        return numberOfRecords;
+                    }
+                    throw new CustomException(CustomException.ExceptionType.INVALID_FILE, "Invalid File");
+                }
+                catch (CsvHelper.MissingFieldException)
+                {
+                    throw new CustomException(CustomException.ExceptionType.INCORRECT_DELIMITER, "Incorrect Delimiter");
+                }
+                catch (CsvHelper.HeaderValidationException)
+                {
+                    throw new CustomException(CustomException.ExceptionType.INCORRECT_HEADER, "Incorrect Header");
                 }
             }
-            return numberOfRecords;
+            throw new CustomException(CustomException.ExceptionType.INVALID_FILE_TYPE, "Invalid File Type");
         }
     }
 }
